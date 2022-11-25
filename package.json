@@ -1,0 +1,23 @@
+{
+  "name": "t7.1",
+  "version": "1.0.0",
+  "description": "## 說明",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch scss/style.scss:style/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/last_stand/t7.1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/last_stand/t7.1/issues"
+  },
+  "homepage": "https://gitlab.com/last_stand/t7.1#readme",
+  "dependencies": {
+    "sass": "^1.55.0"
+  }
+}

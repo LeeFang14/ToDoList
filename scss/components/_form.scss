@@ -1,0 +1,120 @@
+@use "../utility/breakpoints" as *;
+@use "../utility/color";
+
+.item {
+  background: color.$gary-100;
+  border-radius: 5px;
+}
+
+// 點擊處
+.item_heading {
+  padding: 16px;
+  text-align-last: justify;
+  font-size: 0;
+  .text_area,
+  .btn_area {
+    display: inline-flex;
+    vertical-align: middle;
+    text-align-last: initial;
+  }
+}
+
+.text_area {
+  width: 80%;
+  span {
+    margin-right: 16px;
+    flex: 0 0 auto;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 2px;
+  }
+  input {
+    flex: 2 1 auto;
+    background: initial;
+    padding: 1px;
+    border: 0;
+    font-size: 12px;
+    &::placeholder {
+      line-height: 2;
+      font-weight: 700;
+      color: black;
+    }
+    &:focus-visible {
+      outline: 0px;
+    }
+  }
+}
+
+.btn_area {
+  width: 15%;
+  justify-content: space-between;
+  button {
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    background: color.$gary-100;
+  }
+  .star_btn {
+    margin-right: 0.5rem;
+  }
+  .pen_btn {
+    color: color.$light-blue;
+  }
+}
+
+// 點開後
+.item_body {
+  padding: 16px 32px;
+  border-top: 2px solid color.$gary-300;
+  & > div {
+    line-height: 2;
+  }
+  & > :not(:first-child) {
+    margin-top: 16px;
+  }
+  i {
+    margin-right: 8px;
+  }
+  p {
+    padding-left: 22px;
+    textarea {
+      width: 100%;
+    }
+  }
+  .deadline_box {
+    p {
+      font-size: 0;
+    }
+    input {
+      font-size: 1rem;
+    }
+    .input_date {
+      margin-right: 0.5rem;
+    }
+  }
+  .file_box {
+    .input_file {
+      width: 100%;
+      font-size: 12px;
+    }
+  }
+}
+
+.item_btn {
+  display: flex;
+  & > button {
+    flex: 1 1 0;
+    padding: 10px 0;
+  }
+  .reset_btn {
+    color: color.$red;
+    background-color: white;
+    border-radius: 0 0 0 5px;
+  }
+  .submit_btn {
+    color: white;
+    background-color: color.$light-blue;
+    border-radius: 0 0 5px 0;
+  }
+}

@@ -1,0 +1,41 @@
+// * {
+//   outline: 1px solid red;
+// }
+
+body {
+  min-width: 375px;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  &:visited {
+    color: white;
+  }
+}
+
+p {
+  margin: 0;
+}
+
+p,
+span,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto", sans-serif;
+}
+
+button {
+  border: 0;
+  padding: 0;
+}
+input {
+  border: 0;
+  padding: 0;
+}

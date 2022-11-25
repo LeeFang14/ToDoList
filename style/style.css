@@ -1,0 +1,193 @@
+body {
+  min-width: 375px;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+a:visited {
+  color: white;
+}
+
+p {
+  margin: 0;
+}
+
+p,
+span,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto", sans-serif;
+}
+
+button {
+  border: 0;
+  padding: 0;
+}
+
+input {
+  border: 0;
+  padding: 0;
+}
+
+.item {
+  background: #f2f2f2;
+  border-radius: 5px;
+}
+
+.item_heading {
+  padding: 16px;
+  text-align-last: justify;
+  font-size: 0;
+}
+.item_heading .text_area,
+.item_heading .btn_area {
+  display: inline-flex;
+  vertical-align: middle;
+  text-align-last: initial;
+}
+
+.text_area {
+  width: 80%;
+}
+.text_area span {
+  margin-right: 16px;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 2px;
+}
+.text_area input {
+  flex: 2 1 auto;
+  background: initial;
+  padding: 1px;
+  border: 0;
+  font-size: 12px;
+}
+.text_area input::placeholder {
+  line-height: 2;
+  font-weight: 700;
+  color: black;
+}
+.text_area input:focus-visible {
+  outline: 0px;
+}
+
+.btn_area {
+  width: 15%;
+  justify-content: space-between;
+}
+.btn_area button {
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  background: #f2f2f2;
+}
+.btn_area .star_btn {
+  margin-right: 0.5rem;
+}
+.btn_area .pen_btn {
+  color: #4a90e2;
+}
+
+.item_body {
+  padding: 16px 32px;
+  border-top: 2px solid #c8c8c8;
+}
+.item_body > div {
+  line-height: 2;
+}
+.item_body > :not(:first-child) {
+  margin-top: 16px;
+}
+.item_body i {
+  margin-right: 8px;
+}
+.item_body p {
+  padding-left: 22px;
+}
+.item_body p textarea {
+  width: 100%;
+}
+.item_body .deadline_box p {
+  font-size: 0;
+}
+.item_body .deadline_box input {
+  font-size: 1rem;
+}
+.item_body .deadline_box .input_date {
+  margin-right: 0.5rem;
+}
+.item_body .file_box .input_file {
+  width: 100%;
+  font-size: 12px;
+}
+
+.item_btn {
+  display: flex;
+}
+.item_btn > button {
+  flex: 1 1 0;
+  padding: 10px 0;
+}
+.item_btn .reset_btn {
+  color: #d0021b;
+  background-color: white;
+  border-radius: 0 0 0 5px;
+}
+.item_btn .submit_btn {
+  color: white;
+  background-color: #4a90e2;
+  border-radius: 0 0 5px 0;
+}
+
+nav {
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  max-width: 1024px;
+  justify-content: space-between;
+  color: #4a90e2;
+  font-size: 16px;
+  text-transform: capitalize;
+}
+@media (min-width: 768px) {
+  nav {
+    font-size: 16px;
+    padding: 0 20%;
+  }
+}
+nav a {
+  padding: 10px 16px;
+}
+nav a:hover, nav a.active {
+  font-weight: 600;
+  color: white;
+  border-bottom: 3px solid #00408b;
+}
+
+header {
+  background: #4a90e2;
+  text-align: center;
+}
+
+main {
+  padding: 16px;
+  height: 100vh;
+  background: #e1e1e1;
+}
+@media (min-width: 768px) {
+  main {
+    padding: 16px 20%;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

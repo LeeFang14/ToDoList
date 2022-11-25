@@ -1,0 +1,26 @@
+@use "../utility/breakpoints" as *;
+@use "../utility/color";
+
+nav {
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  max-width: 1024px;
+  justify-content: space-between;
+  color: color.$light-blue;
+  font-size: 16px;
+  text-transform: capitalize;
+  @include breakpoint($ipad) {
+    font-size: 16px;
+    padding: 0 20%;
+  }
+  a {
+    padding: 10px 16px;
+    &:hover,
+    &.active {
+      font-weight: 600;
+      color: white;
+      border-bottom: 3px solid color.$dark-blue;
+    }
+  }
+}

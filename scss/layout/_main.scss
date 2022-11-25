@@ -1,0 +1,11 @@
+@use "../utility/breakpoints" as *;
+@use "../utility/color";
+
+main {
+  padding: 16px;
+  height: 100vh;
+  background: color.$gary-200;
+  @include breakpoint($ipad) {
+    padding: 16px 20%;
+  }
+}

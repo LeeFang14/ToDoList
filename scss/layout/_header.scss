@@ -1,7 +1,0 @@
-@use "../utility/breakpoints" as *;
-@use "../utility/color";
-
-header {
-  background: color.$light-blue;
-  text-align: center;
-}

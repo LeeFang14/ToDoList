@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "## 說明",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sass": "sass --watch scss/style.scss:style/style.css"
+    "sass": "sass --watch sass/main.scss:css/style.css"
   },
   "repository": {
     "type": "git",

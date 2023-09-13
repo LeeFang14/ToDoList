@@ -1,15 +1,14 @@
 @use "../abstracts/" as *;
 
 .nav_container {
-  ul {
-    display: flex;
-  }
+  display: flex;
   a {
     position: relative;
     padding: 24px 0;
     flex: 1 1 auto;
     display: block;
     text-align: center;
+
     @include Paragraph;
     color: $blue;
     @include breakpoint($sm) {

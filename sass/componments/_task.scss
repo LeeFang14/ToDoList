@@ -49,7 +49,7 @@
   padding: 24px 32px;
   gap: 16px;
 
-  input[type="checkbox"] {
+  input[name="isDone"] {
     flex-shrink: 0;
     width: 24px;
     height: 24px;
@@ -58,7 +58,7 @@
     border-radius: 2px;
     cursor: pointer;
   }
-  input[type="checkbox"]:checked {
+  input[name="isDone"]:checked {
     background: url(../../image/check-solid.svg) $light-blue;
     background-position: center;
     background-repeat: no-repeat;
@@ -86,12 +86,20 @@
     background: none;
     height: 24px;
   }
-  .subscribe:hover {
-    i {
-      font-weight: 600;
-      color: $important;
-    }
+
+  input[name="isImportant"] {
+    flex-shrink: 0;
+    width: 27px;
+    height: 24px;
+    appearance: none;
+    background: url("../../image/star-regular.svg");
+    cursor: pointer;
   }
+  input[name="isImportant"]:hover,
+  input[name="isImportant"]:checked {
+    background: url("../../image/star-solid.svg");
+  }
+
   .edit:hover {
     i {
       font-weight: 600;
@@ -189,7 +197,7 @@
     input[name="date"],
     input[name="time"] {
       width: 162px;
-      padding: 8px 0 8px 16px;
+      padding: 8px 16px;
     }
   }
 }
@@ -258,11 +266,8 @@
   .task_title input[name="title"] {
     background-color: $important-bg;
   }
-  .subscribe {
-    i {
-      font-weight: 600;
-      color: $important;
-    }
+  input[name="isImportant"] {
+    background: url("../../image/star-solid.svg");
   }
 }
 .task_container.finished {

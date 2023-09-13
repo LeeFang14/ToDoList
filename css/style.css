@@ -7,12 +7,6 @@ a {
   text-decoration: none;
 }
 
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
 input,
 textarea,
 button {
@@ -23,7 +17,7 @@ button {
   max-width: 660px;
 }
 
-.nav_container ul {
+.nav_container {
   display: flex;
 }
 .nav_container a {
@@ -114,7 +108,7 @@ header {
   padding: 24px 32px;
   gap: 16px;
 }
-.task_title input[type=checkbox] {
+.task_title input[name=isDone] {
   flex-shrink: 0;
   width: 24px;
   height: 24px;
@@ -123,7 +117,7 @@ header {
   border-radius: 2px;
   cursor: pointer;
 }
-.task_title input[type=checkbox]:checked {
+.task_title input[name=isDone]:checked {
   background: url(../../image/check-solid.svg) #4a90e2;
   background-position: center;
   background-repeat: no-repeat;
@@ -156,9 +150,17 @@ header {
   background: none;
   height: 24px;
 }
-.task_title .subscribe:hover i {
-  font-weight: 600;
-  color: #f5a623;
+.task_title input[name=isImportant] {
+  flex-shrink: 0;
+  width: 27px;
+  height: 24px;
+  appearance: none;
+  background: url("../../image/star-regular.svg");
+  cursor: pointer;
+}
+.task_title input[name=isImportant]:hover,
+.task_title input[name=isImportant]:checked {
+  background: url("../../image/star-solid.svg");
 }
 .task_title .edit:hover i {
   font-weight: 600;
@@ -263,7 +265,7 @@ header {
 .task_content .date_container input[name=date],
 .task_content .date_container input[name=time] {
   width: 162px;
-  padding: 8px 0 8px 16px;
+  padding: 8px 16px;
 }
 
 .task_control {
@@ -333,9 +335,8 @@ header {
 .task_container.important .task_title input[name=title] {
   background-color: #fff2dc;
 }
-.task_container.important .subscribe i {
-  font-weight: 600;
-  color: #f5a623;
+.task_container.important input[name=isImportant] {
+  background: url("../../image/star-solid.svg");
 }
 
 .task_container.finished {

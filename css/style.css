@@ -93,7 +93,6 @@ header {
   font-weight: 400;
   font-style: italic;
   color: #c8c8c8;
-  order: 99999;
 }
 
 .task_container {
@@ -340,7 +339,7 @@ header {
 }
 
 .task_container.finished {
-  order: 999;
+  order: 2;
 }
 .task_container.finished .task_title input[name=title] {
   text-decoration: line-through;

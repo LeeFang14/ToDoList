@@ -35,7 +35,6 @@
 }
 .task_counter {
   @include Status;
-  order: 99999;
 }
 // base task
 .task_container {
@@ -271,7 +270,7 @@
   }
 }
 .task_container.finished {
-  order: 999;
+  order: 2;
   .task_title {
     input[name="title"] {
       text-decoration: line-through;

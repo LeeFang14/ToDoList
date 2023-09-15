@@ -2,7 +2,7 @@ const taskAddIcon = document.querySelector(".task_adding_icon"); // 點擊新增
 const newTask = document.querySelector(".task_container.new_task"); //整個表單
 const taskList = document.querySelector(".task_list_container"); // 要渲染的區塊
 const fileInput = document.querySelector("#file-upload"); // 選擇檔案
-export let tasks = JSON.parse(localStorage.getItem("items")) || [];
+let tasks = JSON.parse(localStorage.getItem("items")) || [];
 
 function getCurrentDate() {
   const now = new Date();
@@ -28,10 +28,7 @@ function getFileDetail(e) {
     file_detail.classList.add("file_detail");
     file_detail.innerHTML = `
       <span class="file_name">${fileName}</span>
-      <span class="file_time" data-time="${fileUploaded}">uploaded ${fileUploaded.replace(
-      /-/g,
-      "/"
-    )}</span>
+      <span class="file_time" data-time="${fileUploaded}">uploaded ${fileUploaded.replace(/-/g, "/")}</span>
     `;
 
     fileContainer.insertBefore(file_detail, fileContainer.firstChild);
@@ -86,21 +83,24 @@ function filterTasks(tasks) {
 export function renderForms(tasks = [], tasksList) {
   const filteredTasks = filterTasks(tasks);
   tasksList.innerHTML = filteredTasks
-    .map((task) => {
+    .map((task, index) => {
+      // 判斷form的class
+      const isFinished = task.isDone ? "finished" : "";
+      const isImportant = task.isImportant ? "important" : "";
+      // 判斷checkbox被點擊狀態
+      const isFinishedChecked = task.isDone ? "checked" : "";
+      const isImportantChecked = task.isImportant ? "checked" : "";
+      // 判斷任務已完成 => 星星禁按、form禁拖曳
+      const isDraggable = task.isDone ? "" : "draggable='true'";
+      const isImportantDisabled = task.isDone ? "disabled" : "";
       return `
-      <form class="task_container ${task.isDone ? "finished" : ""} ${
-        task.isImportant ? "important" : ""
-      }"  draggable="true">
+      <form class="task_container ${isFinished} ${isImportant}" ${isDraggable} data-index=${task.id}>
         <div class="task_title">
-          <input type="checkbox" name="isDone" data-index=${task.id} ${
-        task.isDone ? "checked" : ""
-      } />
+          <input type="checkbox" name="isDone" ${isFinishedChecked}/>
           <div class="task_title_dashboard">
             <div>
-              <input type="text" name="title" value="${task.title}" disabled />
-              <input type="checkbox"  name="isImportant" data-index=${task.id} ${
-        task.isImportant ? "checked" : ""
-      }/>
+              <input type="text" name="title" value="${task.title}" disabled/>
+              <input type="checkbox"  name="isImportant" ${isImportantChecked} ${isImportantDisabled}/>
               <button class="edit" type="button">
                 <i class="fa-light fa-pen"></i>
               </button>
@@ -146,13 +146,13 @@ export function renderForms(tasks = [], tasksList) {
                 task.file
                   ? `<div class="file_detail">
                   <span class="file_name">${task.file}</span>
-                  <span class="file_time">uploaded ${task.fileUploaded.replace(/-/g, "/")}</span>
+                  <span class="file_time" data-time="${task.fileUploaded}">uploaded ${task.fileUploaded.replace(/-/g, "/")}</span>
                     </div>`
                   : ""
               }
-                <label for="file-upload${task.id}" class="add_file">
+                <label for="file-upload${index}" class="add_file">
                   <i class="fa-light fa-plus"></i>
-                  <input id="file-upload${task.id}" type="file" />
+                  <input id="file-upload${index}" type="file" />
                 </label>
               </div>
             </div>
@@ -211,8 +211,8 @@ function toggleEdit(parentForm) {
 }
 
 function toggleSubscribe(el) {
-  const id = +el.dataset.index;
-  const index = tasks.findIndex((element) => element.id === id);
+  const id = el.dataset.index;
+  const index = tasks.findIndex((task) => +task.id === +id);
   tasks[index].isImportant = !tasks[index].isImportant;
   localStorage.setItem("items", JSON.stringify(tasks));
   tasks = JSON.parse(localStorage.getItem("items"));
@@ -220,31 +220,34 @@ function toggleSubscribe(el) {
 }
 
 function toggleDone(el) {
-  const id = +el.dataset.index;
-  const index = tasks.findIndex((element) => element.id === id);
+  const id = el.dataset.index;
+  const index = tasks.findIndex((task) => +task.id === +id);
   tasks[index].isDone = !tasks[index].isDone;
+  if (tasks[index].isDone === true) {
+    tasks[index].isImportant = false;
+  }
   localStorage.setItem("items", JSON.stringify(tasks));
   tasks = JSON.parse(localStorage.getItem("items"));
   renderForms(tasks, taskList);
 }
 
-function toggle(e) {
+function handleTaskClick(e) {
   const el = e.target;
-  const parentForm = el.closest(".task_container");
+  const currentForm = el.closest(".task_container");
 
   if (el.classList.contains("fa-pen")) {
     e.preventDefault();
-    toggleEdit(parentForm);
+    toggleEdit(currentForm);
   }
   if (el.tagName === "INPUT" && el.name === "isImportant") {
-    toggleSubscribe(el);
+    toggleSubscribe(currentForm);
   }
   if (el.tagName === "INPUT" && el.name === "isDone") {
-    toggleDone(el);
+    toggleDone(currentForm);
   }
 }
 
-taskList.addEventListener("click", toggle);
+taskList.addEventListener("click", handleTaskClick);
 
 taskList.addEventListener("input", (e) => {
   const el = e.target;
@@ -253,23 +256,19 @@ taskList.addEventListener("input", (e) => {
   }
 });
 
-taskList.addEventListener("submit", (e) => {
-  e.preventDefault();
-  editTask(e);
-});
+taskList.addEventListener("submit", editTask);
 taskList.addEventListener("reset", (e) => {
-  const form = e.target; // 整張表單
+  const form = e.target;
   form.classList.remove("editing");
   renderForms(tasks, taskList);
 });
 
 function editTask(e) {
   e.preventDefault();
-  const form = e.target; // 整張表單
+  const form = e.target.closest(".task_container");
   const formData = new FormData(form);
-  const id = form.querySelector('input[type="checkbox"]').dataset.index;
-  const index = tasks.findIndex((form) => form.id === +id);
-
+  const id = form.dataset.index;
+  const index = tasks.findIndex((form) => +form.id === +id);
   const fileNode = form.querySelector(".file_name");
   const fileName = fileNode ? fileNode.textContent : "";
   const uploadNode = form.querySelector(".file_time");
@@ -289,27 +288,8 @@ function editTask(e) {
   renderForms(tasks, taskList);
 }
 
-// 拖曳 from 監聽
-taskList.addEventListener("drag", (e) => {
-  // 拖曳時，原位置的元素
-  const from = e.target;
-  from.style.opacity = 0;
-});
-
-taskList.addEventListener("dragstart", (e) => {
-  // 拖曳中的元素
-  const from = e.target;
-  from.classList.add("dragging");
-});
-
-taskList.addEventListener("dragend", (e) => {
-  const from = e.target;
-  from.classList.remove("dragging");
-  from.style.opacity = 1;
-});
-
+// nav 選單
 const nav = document.querySelector(".nav_container");
-
 nav.addEventListener("click", (e) => {
   const currentLink = e.target;
   window.location.href = e.target.href;
@@ -329,3 +309,48 @@ nav.addEventListener("click", (e) => {
 
 // 初始渲染
 renderForms(tasks, taskList);
+
+// 拖曳 from 監聽
+taskList.addEventListener("drag", (e) => {
+  // 拖曳時，原位置的元素
+  e.target.style.opacity = 0;
+});
+
+taskList.addEventListener("dragstart", (e) => {
+  e.target.classList.add("dragging");
+  const dataIndex = e.target.dataset.index;
+  e.dataTransfer.setData("text/plain", dataIndex); // 把當前拖曳中的元素id寫到e.dataTransfer
+});
+
+taskList.addEventListener("dragover", (e) => {
+  e.preventDefault();
+});
+
+taskList.addEventListener("drop", (e) => {
+  e.preventDefault();
+  // 原拖曳的from (在dragstart時已經寫進e.dataTransfer保存)
+  const originFormId = e.dataTransfer.getData("text/plain");
+
+  // 拖放區form
+  const dropzoneForm = e.target.closest(".task_container");
+  if (dropzoneForm) {
+    const dropzoneFormId = dropzoneForm.dataset.index;
+    if (+originFormId === +dropzoneFormId) return;
+    // 從id取得本身的index
+    const originFormIndex = tasks.findIndex((form) => +form.id === +originFormId);
+    const dropzoneFormIndex = tasks.findIndex((form) => +form.id === +dropzoneFormId);
+
+    const insertForm = tasks[originFormIndex]; // 因為拖曳的form會在原陣列中刪除，所以要先暫存。
+    // 删除拖曳的form
+    tasks.splice(originFormIndex, 1);
+    // 插入到目標位置
+    tasks.splice(dropzoneFormIndex, 0, insertForm);
+  }
+});
+
+taskList.addEventListener("dragend", (e) => {
+  e.target.classList.remove("dragging");
+  e.target.style.opacity = 1;
+  localStorage.setItem("items", JSON.stringify(tasks));
+  renderForms(tasks, taskList);
+});

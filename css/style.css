@@ -117,7 +117,7 @@ header {
   cursor: pointer;
 }
 .task_title input[name=isDone]:checked {
-  background: url(../../image/check-solid.svg) #4a90e2;
+  background: url(../image/check-solid.svg) #4a90e2;
   background-position: center;
   background-repeat: no-repeat;
   background-size: 80%;
@@ -154,12 +154,12 @@ header {
   width: 27px;
   height: 24px;
   appearance: none;
-  background: url("../../image/star-regular.svg");
+  background: url("../image/star-regular.svg");
   cursor: pointer;
 }
 .task_title input[name=isImportant]:hover,
 .task_title input[name=isImportant]:checked {
-  background: url("../../image/star-solid.svg");
+  background: url("../image/star-solid.svg");
 }
 .task_title .edit:hover i {
   font-weight: 600;
@@ -335,7 +335,7 @@ header {
   background-color: #fff2dc;
 }
 .task_container.important input[name=isImportant] {
-  background: url("../../image/star-solid.svg");
+  background: url("../image/star-solid.svg");
 }
 
 .task_container.finished {

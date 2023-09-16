@@ -58,7 +58,7 @@
     cursor: pointer;
   }
   input[name="isDone"]:checked {
-    background: url(../../image/check-solid.svg) $light-blue;
+    background: url(../image/check-solid.svg) $light-blue;
     background-position: center;
     background-repeat: no-repeat;
     background-size: 80%;
@@ -91,12 +91,12 @@
     width: 27px;
     height: 24px;
     appearance: none;
-    background: url("../../image/star-regular.svg");
+    background: url("../image/star-regular.svg");
     cursor: pointer;
   }
   input[name="isImportant"]:hover,
   input[name="isImportant"]:checked {
-    background: url("../../image/star-solid.svg");
+    background: url("../image/star-solid.svg");
   }
 
   .edit:hover {
@@ -266,7 +266,7 @@
     background-color: $important-bg;
   }
   input[name="isImportant"] {
-    background: url("../../image/star-solid.svg");
+    background: url("../image/star-solid.svg");
   }
 }
 .task_container.finished {

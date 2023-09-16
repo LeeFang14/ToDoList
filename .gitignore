@@ -1,0 +1,7 @@
+.sass-cache/
+*.css.map
+*.DS_Store
+*.psd
+template_6.png
+node_modules/
+*/node_modules/

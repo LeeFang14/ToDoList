@@ -117,7 +117,7 @@ header {
   cursor: pointer;
 }
 .task_title input[name=isDone]:checked {
-  background: url(../image/check-solid.svg) #4a90e2;
+  background: url("../image/check-solid.svg") #4a90e2;
   background-position: center;
   background-repeat: no-repeat;
   background-size: 80%;

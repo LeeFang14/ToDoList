@@ -58,7 +58,7 @@
     cursor: pointer;
   }
   input[name="isDone"]:checked {
-    background: url(../image/check-solid.svg) $light-blue;
+    background: url("../image/check-solid.svg") $light-blue;
     background-position: center;
     background-repeat: no-repeat;
     background-size: 80%;
